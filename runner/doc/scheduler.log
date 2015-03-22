@@ -1,0 +1,183 @@
+2013-09-16 22:39:20 INFO  ClassPathXmlApplicationContext:510 - Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@1913c652: startup date [Mon Sep 16 22:39:20 BST 2013]; root of context hierarchy
+2013-09-16 22:39:20 INFO  XmlBeanDefinitionReader:315 - Loading XML bean definitions from class path resource [com/pairoo/frontend/scheduler/application/springBeans.xml]
+2013-09-16 22:39:20 INFO  XmlBeanDefinitionReader:315 - Loading XML bean definitions from class path resource [com/pairoo/frontend/scheduler/application/springBeans-COMMON.xml]
+2013-09-16 22:39:20 INFO  XmlBeanDefinitionReader:315 - Loading XML bean definitions from class path resource [com/pairoo/frontend/scheduler/application/springBeans-PROD.xml]
+2013-09-16 22:39:21 INFO  PropertyPlaceholderConfigurer:172 - Loading properties file from class path resource [com/pairoo/frontend/scheduler/application/springBeans-PROD.properties]
+2013-09-16 22:39:21 INFO  DefaultListableBeanFactory:596 - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@a83234a: defining beans [org.springframework.beans.factory.config.PropertyPlaceholderConfigurer#0,org.springframework.beans.factory.config.PropertyPlaceholderConfigurer#1,partnerSuggestionTrigger,partnerSuggestionJob,dataSource,sessionFactory,transactionManager,txAdviceForDaos,org.springframework.aop.config.internalAutoProxyCreator,org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#0,org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#1,org.springframework.aop.support.DefaultBeanFactoryPointcutAdvisor#2,userDao,freemarkerConfiguration,mailCreatorForPartnerSuggestions,mailServer,geoLocationService,subdivisionService,subdivisionDao,geoLocationDao,schedulerFactoryBean]; root of factory hierarchy
+2013-09-16 22:39:21 INFO  DriverManagerDataSource:153 - Loaded JDBC driver: org.postgresql.Driver
+2013-09-16 22:39:21 INFO  Version:37 - HCANN000001: Hibernate Commons Annotations {4.0.2.Final}
+2013-09-16 22:39:21 INFO  Version:41 - HHH000412: Hibernate Core {4.2.3.Final}
+2013-09-16 22:39:21 INFO  Environment:239 - HHH000206: hibernate.properties not found
+2013-09-16 22:39:21 INFO  Environment:342 - HHH000021: Bytecode provider name : javassist
+2013-09-16 22:39:23 INFO  Dialect:130 - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQL82Dialect
+2013-09-16 22:39:23 INFO  LobCreatorBuilder:120 - HHH000424: Disabling contextual LOB creation as createClob() method threw error : java.lang.reflect.InvocationTargetException
+2013-09-16 22:39:24 INFO  TransactionFactoryInitiator:68 - HHH000399: Using default transaction strategy (direct JDBC transactions)
+2013-09-16 22:39:24 INFO  ASTQueryTranslatorFactory:48 - HHH000397: Using ASTQueryTranslatorFactory
+2013-09-16 22:39:24 INFO  Version:24 - Hibernate Validator 4.2.0.Final
+2013-09-16 22:39:25 INFO  HibernateTransactionManager:339 - Using DataSource [org.springframework.jdbc.datasource.DriverManagerDataSource@5e6b6477] of Hibernate SessionFactory for HibernateTransactionManager
+2013-09-16 22:39:25 INFO  SpringTemplateLoader:61 - SpringTemplateLoader for FreeMarker: using resource loader [org.springframework.context.support.ClassPathXmlApplicationContext@1913c652: startup date [Mon Sep 16 22:39:20 BST 2013]; root of context hierarchy] and template loader path [classpath:/com/pairoo/frontend/scheduler/application/business/templates/]
+2013-09-16 22:39:25 INFO  StdSchedulerFactory:1184 - Using default implementation for ThreadExecutor
+2013-09-16 22:39:25 INFO  SchedulerSignalerImpl:61 - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2013-09-16 22:39:25 INFO  QuartzScheduler:249 - Quartz Scheduler v.2.2.0 created.
+2013-09-16 22:39:25 INFO  RAMJobStore:155 - RAMJobStore initialized.
+2013-09-16 22:39:25 INFO  QuartzScheduler:318 - Scheduler meta-data: Quartz Scheduler (v2.2.0) 'schedulerFactoryBean' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2013-09-16 22:39:25 INFO  StdSchedulerFactory:1339 - Quartz scheduler 'schedulerFactoryBean' initialized from an externally provided properties instance.
+2013-09-16 22:39:25 INFO  StdSchedulerFactory:1343 - Quartz scheduler version: 2.2.0
+2013-09-16 22:39:25 INFO  QuartzScheduler:2346 - JobFactory set to: org.springframework.scheduling.quartz.AdaptableJobFactory@23b4645e
+2013-09-16 22:39:25 INFO  DefaultLifecycleProcessor:334 - Starting beans in phase 2147483647
+2013-09-16 22:39:25 INFO  SchedulerFactoryBean:648 - Starting Quartz Scheduler now
+2013-09-16 22:39:25 INFO  QuartzScheduler:588 - Scheduler schedulerFactoryBean_$_NON_CLUSTERED started.
+2013-09-16 22:40:00 INFO  PartnerSuggestionsJob:66 - Job execution started..
+2013-09-16 22:40:02 INFO  PartnerSuggestionsJob:90 - For user 1: Found 3 matching users for suggestions.
+2013-09-16 22:40:04 INFO  PartnerSuggestionsJob:90 - For user 1: Found 3 matching users for suggestions.
+2013-09-16 22:40:05 INFO  PartnerSuggestionsJob:90 - For user 1: Found 3 matching users for suggestions.
+2013-09-16 22:40:06 INFO  PartnerSuggestionsJob:90 - For user 11: Found 3 matching users for suggestions.
+2013-09-16 22:40:07 INFO  PartnerSuggestionsJob:90 - For user 21: Found 3 matching users for suggestions.
+2013-09-16 22:40:08 INFO  PartnerSuggestionsJob:90 - For user 21: Found 3 matching users for suggestions.
+2013-09-16 22:40:09 INFO  PartnerSuggestionsJob:90 - For user 22: Found 3 matching users for suggestions.
+2013-09-16 22:40:09 ERROR runtime:98 - Error executing FreeMarker template
+FreeMarker template error:
+The following has evaluated to null or missing:
+==> firstname  [in template "PartnerSuggestion.html.ftl" at line 36, column 25]
+
+Tip: If the failing expression is known to be legally null/missing, either specify a default value with myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthessis: (myOptionVar.foo)!myDefault, (myOptionVar.foo)??
+
+The failing instruction (FTL stack trace):
+----------
+==> ${firstname}  [in template "PartnerSuggestion.html.ftl" at line 36, column 23]
+----------
+
+Java stack trace (for programmers):
+----------
+freemarker.core.InvalidReferenceException: [... Exception message was already printed; see it above ...]
+	at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:98)
+	at freemarker.core.EvalUtil.coerceModelToString(EvalUtil.java:382)
+	at freemarker.core.Expression.evalAndCoerceToString(Expression.java:115)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment.process(Environment.java:243)
+	at freemarker.template.Template.process(Template.java:277)
+	at org.springframework.ui.freemarker.FreeMarkerTemplateUtils.processTemplateIntoString(FreeMarkerTemplateUtils.java:49)
+	at com.pairoo.frontend.scheduler.application.business.mailcontent.FreemarkerMailCreator.getMail(FreemarkerMailCreator.java:45)
+	at com.pairoo.frontend.scheduler.application.business.mailcontent.FreemarkerMailCreator.getHtmlMail(FreemarkerMailCreator.java:33)
+	at com.pairoo.frontend.scheduler.application.business.PartnerSuggestionsJob.execute(PartnerSuggestionsJob.java:135)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:207)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:560)
+2013-09-16 22:40:09 ERROR FreemarkerMailCreator:49 - Could not process template.
+FreeMarker template error:
+The following has evaluated to null or missing:
+==> firstname  [in template "PartnerSuggestion.html.ftl" at line 36, column 25]
+
+Tip: If the failing expression is known to be legally null/missing, either specify a default value with myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthessis: (myOptionVar.foo)!myDefault, (myOptionVar.foo)??
+
+The failing instruction (FTL stack trace):
+----------
+==> ${firstname}  [in template "PartnerSuggestion.html.ftl" at line 36, column 23]
+----------
+
+Java stack trace (for programmers):
+----------
+freemarker.core.InvalidReferenceException: [... Exception message was already printed; see it above ...]
+	at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:98)
+	at freemarker.core.EvalUtil.coerceModelToString(EvalUtil.java:382)
+	at freemarker.core.Expression.evalAndCoerceToString(Expression.java:115)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment.process(Environment.java:243)
+	at freemarker.template.Template.process(Template.java:277)
+	at org.springframework.ui.freemarker.FreeMarkerTemplateUtils.processTemplateIntoString(FreeMarkerTemplateUtils.java:49)
+	at com.pairoo.frontend.scheduler.application.business.mailcontent.FreemarkerMailCreator.getMail(FreemarkerMailCreator.java:45)
+	at com.pairoo.frontend.scheduler.application.business.mailcontent.FreemarkerMailCreator.getHtmlMail(FreemarkerMailCreator.java:33)
+	at com.pairoo.frontend.scheduler.application.business.PartnerSuggestionsJob.execute(PartnerSuggestionsJob.java:135)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:207)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:560)
+2013-09-16 22:40:09 ERROR runtime:98 - Error executing FreeMarker template
+FreeMarker template error:
+The following has evaluated to null or missing:
+==> firstname  [in template "PartnerSuggestion.text.ftl" at line 1, column 9]
+
+Tip: If the failing expression is known to be legally null/missing, either specify a default value with myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthessis: (myOptionVar.foo)!myDefault, (myOptionVar.foo)??
+
+The failing instruction (FTL stack trace):
+----------
+==> ${firstname}  [in template "PartnerSuggestion.text.ftl" at line 1, column 7]
+----------
+
+Java stack trace (for programmers):
+----------
+freemarker.core.InvalidReferenceException: [... Exception message was already printed; see it above ...]
+	at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:98)
+	at freemarker.core.EvalUtil.coerceModelToString(EvalUtil.java:382)
+	at freemarker.core.Expression.evalAndCoerceToString(Expression.java:115)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment.process(Environment.java:243)
+	at freemarker.template.Template.process(Template.java:277)
+	at org.springframework.ui.freemarker.FreeMarkerTemplateUtils.processTemplateIntoString(FreeMarkerTemplateUtils.java:49)
+	at com.pairoo.frontend.scheduler.application.business.mailcontent.FreemarkerMailCreator.getMail(FreemarkerMailCreator.java:45)
+	at com.pairoo.frontend.scheduler.application.business.mailcontent.FreemarkerMailCreator.getTextMail(FreemarkerMailCreator.java:29)
+	at com.pairoo.frontend.scheduler.application.business.PartnerSuggestionsJob.execute(PartnerSuggestionsJob.java:136)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:207)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:560)
+2013-09-16 22:40:09 ERROR FreemarkerMailCreator:49 - Could not process template.
+FreeMarker template error:
+The following has evaluated to null or missing:
+==> firstname  [in template "PartnerSuggestion.text.ftl" at line 1, column 9]
+
+Tip: If the failing expression is known to be legally null/missing, either specify a default value with myOptionalVar!myDefault, or use <#if myOptionalVar??>when-present<#else>when-missing</#if>. (These only cover the last step of the expression; to cover the whole expression, use parenthessis: (myOptionVar.foo)!myDefault, (myOptionVar.foo)??
+
+The failing instruction (FTL stack trace):
+----------
+==> ${firstname}  [in template "PartnerSuggestion.text.ftl" at line 1, column 7]
+----------
+
+Java stack trace (for programmers):
+----------
+freemarker.core.InvalidReferenceException: [... Exception message was already printed; see it above ...]
+	at freemarker.core.InvalidReferenceException.getInstance(InvalidReferenceException.java:98)
+	at freemarker.core.EvalUtil.coerceModelToString(EvalUtil.java:382)
+	at freemarker.core.Expression.evalAndCoerceToString(Expression.java:115)
+	at freemarker.core.DollarVariable.accept(DollarVariable.java:76)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.MixedContent.accept(MixedContent.java:93)
+	at freemarker.core.Environment.visit(Environment.java:265)
+	at freemarker.core.Environment.process(Environment.java:243)
+	at freemarker.template.Template.process(Template.java:277)
+	at org.springframework.ui.freemarker.FreeMarkerTemplateUtils.processTemplateIntoString(FreeMarkerTemplateUtils.java:49)
+	at com.pairoo.frontend.scheduler.application.business.mailcontent.FreemarkerMailCreator.getMail(FreemarkerMailCreator.java:45)
+	at com.pairoo.frontend.scheduler.application.business.mailcontent.FreemarkerMailCreator.getTextMail(FreemarkerMailCreator.java:29)
+	at com.pairoo.frontend.scheduler.application.business.PartnerSuggestionsJob.execute(PartnerSuggestionsJob.java:136)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:207)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:560)
+2013-09-16 22:40:09 ERROR JobRunShell:216 - Job DEFAULT.partnerSuggestionJob threw an unhandled Exception: 
+java.lang.IllegalArgumentException: Plain text must not be null
+	at org.springframework.util.Assert.notNull(Assert.java:112)
+	at org.springframework.mail.javamail.MimeMessageHelper.setText(MimeMessageHelper.java:809)
+	at com.pairoo.frontend.scheduler.application.business.PartnerSuggestionsJob.createMail(PartnerSuggestionsJob.java:153)
+	at com.pairoo.frontend.scheduler.application.business.PartnerSuggestionsJob.execute(PartnerSuggestionsJob.java:139)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:207)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:560)
+2013-09-16 22:40:09 ERROR ErrorLogger:2460 - Job (DEFAULT.partnerSuggestionJob threw an exception.
+org.quartz.SchedulerException: Job threw an unhandled exception. [See nested exception: java.lang.IllegalArgumentException: Plain text must not be null]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:218)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:560)
+Caused by: java.lang.IllegalArgumentException: Plain text must not be null
+	at org.springframework.util.Assert.notNull(Assert.java:112)
+	at org.springframework.mail.javamail.MimeMessageHelper.setText(MimeMessageHelper.java:809)
+	at com.pairoo.frontend.scheduler.application.business.PartnerSuggestionsJob.createMail(PartnerSuggestionsJob.java:153)
+	at com.pairoo.frontend.scheduler.application.business.PartnerSuggestionsJob.execute(PartnerSuggestionsJob.java:139)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:207)
+	... 1 more

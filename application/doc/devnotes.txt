@@ -1,0 +1,67 @@
+Some notes for developers
+
+Decisions & notes
+- usage of plain hibernate is encouraged. Not JPA overhead.
+- dom objects will be reused from pairoo main application (domain module)
+- DAOs will be reused from pairoo backend.db module
+- no annotations in live; JUnit-Files with Annotations are ok
+- use of freemarker for mail templating
+    - Not velocity: last update is out of 2010
+    - Not Wicket templating: would require to start a wicket application (servlet container ...); to much overhead
+- l10n for mail templates is done with the help of freemarker logic (different templates for different languages)
+- There are three sources of tasks
+    - 'TODO:' in code
+    - Task section in this document
+    - JTrac entries
+- mail configuration
+    - Live mailserver is as follows
+        - Server: h2010489.stratoserver.net
+        - see springBeans-COMMON.xml (bean mailServer) and properties files for details
+    - For DEMO following mail acocunts are used
+        - sender: pairoodev@pairoo.com
+        - recipient: pairootst@pairoo.com
+        - PW: t3A#now42
+- Default Locale is set to english (in application) Otherwise, the default locale is detected from the platform executing the application.
+  These platform could differ (dev; demo; prod) and setting the value, it could cause 'wrong' (or unexpected) translations
+- L10n is done with the help of xml property files
+    - class com.pairoo.frontend.scheduler.application.business.l10n.LocalizedStrings (extends com.datazuul.framework.i18n.LocalizedStrings)
+    - property files are stored in according directory to location of LocalizedString class
+    - naming schema is LocalizedStrings_XX.properties.xml (where XX is the country code)
+- Mail templates are stored in the subdirectory 'templates' of the directory structure of the class that uses the template See..
+  com.pairoo.frontend.scheduler.application.business.PartnerSuggestionJob as class and
+  com.pairoo.frontend.scheduler.application.business.templates.PartnerSuggestion.html.ftl as template for Mails.
+- DOM Assumptions & Notes
+    - User.UserProfil.ProfilTyp is never null
+    - User.UserProfil.GeoLocation is never null (while registration an exisiting zipcode and country must been choosen)
+    - User.UserAccount.PreferredLanguage is never ANY (even if enum does allow ANY; default is english; drop-down for user does not contain ANY)
+
+Technical Debts:
+- If any of the entities / aliases within a criteria query are not set in db,
+  query-result will be empty (see UserDaoImpl)
+- If freemaker templates are stored in the same directory as the Job that uses theses templates, they are not found.
+    - Possibly a naming problem; For now solved by putting the templates into a subdirectory.
+
+Tasks
+- email template should support l10n
+    - email template properties should not use hard coded strings (e.g. Online/Offline; Value if family state not given..
+- create a shell script to start this application
+
+
+To discuss with Ralf
+- Confirm: If familystate is set do DONT_SAY or ANY, it is not shown in proposal mail.
+    - Comment: Should familystate really be shown in proposal mail??
+- Comment: c.p.f.s.a.businnes.PartnerSuggestionJob .. search for Ralf. Could you comment on this?
+- Comment: Why are translation in lowercase? See german translation of familystates.. Looks blöd in proposal mail.
+- Comment: I can only provide a single artifact (file) as a result of a project. Currently i have an executable jar as result for the runner project. If i want to create batch/shell script
+  that starts the excutable jar, i would have to create another project that groups the executable jar and the script in one aritfact (possible a zip) Does this makes sense? Is it not enough
+  to just state how you can execute the executable jar in the documention?
+    Answer: Just correct/complete this script: pairoo-frontend-scheduler/runner/src/main/sh/pairoo-scheduler-daemon.sh
+    Reask: Script is ok; but we need to chat about this (single artifact in repository only; extract -exucutable- artifact to get to shell script; modification necessary if new version number)
+- Confirm: SearchProfile always has min and maxAge set.
+- Confirm: SearchProfile always has GeoArea set.
+- Confirm: SearchProfile always has at least one Ethinics set.
+    - If ethnics list is empty (not null, empty!), search for matching user results in an hibernate error.
+- Confirm: Sender-Mailadress is configured in springConfig. Reason: It is the sender mail adress AND the username for mailserver authentication. As lastmentioned is configured in springConfig,
+    this value als needs be put into this configuration file.
+
+

@@ -1,0 +1,15 @@
+
+Decisions & notes
+- this module creates a executable jar
+     - this jar can be started with 'java -Denv=PROD -jar <insertNameOfJarHere>'
+       or giving the cron expression:
+       java -Denv=PROD -DcronExpression="0 0/5 * * * *" -jar <insertNameOfJarHere>
+     - configuration: see springBeans-COMMON.xml (cronExpression see http://quartz-scheduler.org/documentation/quartz-2.x/tutorials/tutorial-lesson-06)
+     - logic in com.pairoo.frontend.scheduler.application.business.PartnerSuggestionsJob
+     - useraccounts getting suggestions: notifiactionsettings: weekendSuggestions==true
+
+Test in production:
+update notificationsettings set weekendsuggestions = false;
+update notificationsettings n set weekendsuggestions=true where n.id in (select notificationsettings from useraccount where username='pairooney');
+
+/etc.init.d/pairooCronJobs.sh start

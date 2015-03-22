@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <comment>This is a Java Property file used for translation by LocalizedStrings class</comment>
+    <entry key="email.subject">New profiles for you from Pairoo!</entry>
+    <!-- Enumeration translation; copied from com/pairoo/frontend/webapp/wicket/WicketWebApplication.properties.xml on 2013/21/08 by khe -->
+    <entry key="FamilyStatusType.ANY">don't care</entry>
+    <entry key="FamilyStatusType.DIVORCED">divorced</entry>
+    <entry key="FamilyStatusType.DONT_SAY">don't say</entry>
+    <entry key="FamilyStatusType.LINKED">linked</entry>
+    <entry key="FamilyStatusType.MARRIED">married</entry>
+    <entry key="FamilyStatusType.SINGLE">single</entry>
+    <entry key="FamilyStatusType.SINGLE_PARENT">single parent</entry>
+    <entry key="FamilyStatusType.SEPARATED">separated</entry>
+    <entry key="FamilyStatusType.WIDOWED">widowed</entry>
+
+</properties>

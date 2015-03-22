@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc-3.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+">
+
+    <bean
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <value>classpath:/com/pairoo/frontend/scheduler/application/springBeans-${env}.properties
+            </value>
+        </property>
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+    </bean>
+
+    <!-- quartz beans (scheduler is missing; is added in PROD and DEMO config-->
+    <bean id="partnerSuggestionTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="partnerSuggestionJob" />
+        <property name="cronExpression" value="${cronExpression}"/>
+        <!--<property name="cronExpression" value="0 0/5 * * * ? *"/>--> 
+	<!-- 0 0 13 ? * FRI -->
+        <!-- expresion = every friday at 1 pm -->
+	<!--
+Cron expressions are comprised of 6 required fields and one optional field separated by white space. The fields respectively are described as follows:
+Field Name 	  	Allowed Values 	  	Allowed Special Characters
+Seconds 	  	0-59			, - * /
+Minutes 	  	0-59			, - * /
+Hours			0-23			, - * /
+Day-of-month	     	1-31			, - * ? / L W
+Month			1-12 or JAN-DEC		, - * /
+Day-of-Week 	  	1-7 or SUN-SAT		, - * ? / L #
+Year (Optional)	  	empty, 1970-2199   	, - * /
+
+The '*' character is used to specify all values. For example, "*" in the minute field means "every minute".
+The '?' character is allowed for the day-of-month and day-of-week fields. It is used to specify 'no specific value'.
+  This is useful when you need to specify something in one of the two fields, but not the other.
+The '-' character is used to specify ranges For example "10-12" in the hour field means "the hours 10, 11 and 12".
+The ',' character is used to specify additional values. For example "MON,WED,FRI" in the day-of-week field means
+  "the days Monday, Wednesday, and Friday". 
+-->
+    </bean>
+    <bean id="partnerSuggestionJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="durability" value="true"/>  <!-- if not set.. error :-(  -->
+        <property name="jobClass" value="com.pairoo.frontend.scheduler.application.business.PartnerSuggestionsJob" />
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="userDao" value-ref="userDao"/>
+                <entry key="mailcontentCreator" value-ref="mailCreatorForPartnerSuggestions"/>
+                <entry key="mailSenderAddress" value="${mail.from}"/>
+                <entry key="mailServer" value-ref="mailServer"/>
+                <entry key="geoLocationService" value-ref="geoLocationService"/>
+                <entry key="rootUrl" value="https://www.pairoo.com/portal/" />
+            </map>
+        </property>
+    </bean>
+
+    <!-- hibernate beans -->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingLocations">
+            <list>
+                <value>classpath*:com/pairoo/**/*.hbm.xml</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <map>
+                <entry key="hibernate.dialect" value="${hibernate.dialect}"/>
+                <entry key="hibernate.connection.pool_size" value="10"></entry>
+                <entry key="hibernate.statement_cache.size" value="10"></entry>
+
+                <!-- Activate new enhanced identifier generators -->
+                <entry key="hibernate.id.new_generator_mappings" value="true"></entry>
+
+                <!-- Automatic creation of database schema -->
+                <!-- <entry key="hibernate.hbm2ddl.auto" value="create-drop"></entry> -->
+                <!-- done now by flyway scripts... -->
+
+                <entry key="hibernate.bytecode.use_reflection_optimizer" value="false"></entry>
+
+                <entry key="hibernate.show_sql" value="false"></entry>
+                <entry key="hibernate.format_sql" value="false"></entry>
+
+                <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"></entry>
+                <entry key="hibernate.hibernate.cache.use_query_cache" value="true"></entry>
+            </map>
+        </property>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <tx:advice id="txAdviceForDaos" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="*" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:advisor pointcut="execution(* com.pairoo.frontend.scheduler.application.backend.dao.*.*(..))" advice-ref="txAdviceForDaos"/>
+        <!--<aop:advisor pointcut="execution(* com.pairoo.frontend.scheduler.application.backend.db.hibernate.**.*(..))" advice-ref="txAdviceForDaos"/>-->
+        <aop:advisor pointcut="execution(* com.pairoo.backend.db.hibernate.**.*(..))" advice-ref="txAdviceForDaos"/>
+        <aop:advisor pointcut="execution(* com.googlecode.genericdao.dao.hibernate.*.*(..))" advice-ref="txAdviceForDaos"/>
+    </aop:config>
+
+    <bean id="userDao" class="com.pairoo.frontend.scheduler.application.backend.db.hibernate.UserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <!-- mail content templating -->
+    <bean id="freemarkerConfiguration" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+        <property name="templateLoaderPath" value="classpath:/com/pairoo/frontend/scheduler/application/business/templates" />
+    </bean>
+    <bean id="mailCreatorForPartnerSuggestions" class="com.pairoo.frontend.scheduler.application.business.mailcontent.FreemarkerMailCreator">
+        <property name="freemarkerconfiguation" ref="freemarkerConfiguration"/>
+        <property name="nameOfTextTemplate" value="PartnerSuggestion.text.ftl"/>
+        <property name="nameOfHtmlTemplate" value="PartnerSuggestion.html.ftl"/>
+    </bean>
+
+    <bean id="mailServer" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${mail.host}"/>
+        <property name="port" value="${mail.port}"/>
+        <property name="username" value="${mail.username}"/>
+        <property name="password" value="${mail.password}"/>
+        <property name="protocol" value="${mail.protocol}" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtps.auth">${mail.smtps.auth}</prop>
+                <prop key="mail.smtps.starttls.enable">${mail.smtps.starttls.enable}</prop>
+                <!--<prop key="mail.smtps.debug">true</prop>-->
+            </props>
+        </property>
+    </bean>
+
+    <!-- beans for geoLocation -->
+    <bean id="geoLocationService"
+          class="com.pairoo.business.services.impl.GeoLocationServiceImpl">
+        <constructor-arg ref="geoLocationDao" />
+        <constructor-arg ref="subdivisionService" />
+    </bean>
+    <bean id="subdivisionService"
+          class="com.pairoo.business.services.impl.SubdivisionServiceImpl">
+        <constructor-arg ref="subdivisionDao" />
+    </bean>
+    <bean id="subdivisionDao" class="com.pairoo.backend.db.hibernate.SubdivisionDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <bean id="geoLocationDao" class="com.pairoo.backend.db.hibernate.GeoLocationDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+</beans>
