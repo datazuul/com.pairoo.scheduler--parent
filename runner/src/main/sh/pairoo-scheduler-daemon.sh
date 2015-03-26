@@ -1,10 +1,26 @@
-#!/bin/bash
+#! /bin/sh
 
-# change to directory containing JAR
-cd /usr/local/bin
+do_start () {
+        java -Denv=PROD -DcronExpression="0 0 13 ? * FRI *" -jar /home/datazuul/PmailDaemonRunner-1.0-SNAPSHOT.jar
+}
 
-# start java app:
-java -Denv=PROD -jar PmailDaemonRunner-1.0-SNAPSHOT.jar "0 13 * * 5 ?"
-
-# start all 10 minutes
-#java -Denv=PROD -jar PmailDaemonRunner-1.0-SNAPSHOT.jar "0 0/5 * * * ? *"
+case "$1" in
+  start|"")
+        do_start
+        ;;
+  restart|reload|force-reload)
+        echo "Error: argument '$1' not supported" >&2
+        exit 3
+        ;;
+  stop)
+        # No-op
+        ;;
+  status)
+        do_status
+        exit $?
+        ;;
+  *)
+        echo "Usage: pairooCronJobs.sh [start|stop]" >&2
+        exit 3
+        ;;
+esac
